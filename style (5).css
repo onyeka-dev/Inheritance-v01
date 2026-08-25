@@ -1,0 +1,446 @@
+ /* =========================================================
+   CSS INHERITANCE LAB
+   Purpose:
+   Test inheritance, inherit, initial, unset, revert,
+   revert-layer, and cascade + inheritance.
+
+   MY JOB:
+   1. Predict what each experiment will do.
+   2. Write my prediction as a comment.
+   3. Run the page in the browser.
+   4. Record what actually happened.
+   5. Explain why.
+========================================================= */
+
+
+/* =========================================================
+   BASIC PAGE STYLING
+========================================================= */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f4f4f4;
+  color: #222;
+}
+
+.lab {
+  max-width: 800px;
+  margin: auto;
+}
+
+.experiment {
+  margin-bottom: 25px;
+  padding: 20px;
+  background: white;
+  border: 2px solid #333;
+}
+
+.experiment h2 {
+  margin-top: 0;
+}
+
+.parent {
+  padding: 15px;
+  border: 2px solid #777;
+}
+
+.parent p {
+  padding: 10px;
+  border: 1px solid #999;
+}
+
+
+/* =========================================================
+   EXPERIMENT 1
+   NATURAL INHERITANCE
+========================================================= */
+
+.exp1 {
+  color: red;
+}
+
+.exp1 p {
+  /* No color declaration */
+}
+
+/*
+PREDICTION:
+What color will the paragraph be?
+
+Red
+
+WHY: because the child property has no value of its own and the color property is inheritable.
+*/
+ 
+
+/* =========================================================
+   EXPERIMENT 2
+   CHILD HAS ITS OWN VALUE
+========================================================= */
+
+.exp2 {
+  color: red;
+}
+
+.exp2 p {
+  color: blue;
+}
+
+/*
+PREDICTION:
+What color will the paragraph be?
+
+Blue
+
+WHY: because inheritance job is to supply value to the child if inheritable and in the absence of one not to compete with child value.
+*/
+
+
+/* =========================================================
+   EXPERIMENT 3
+   FORCED INHERITANCE
+========================================================= */
+
+.exp3 {
+  padding: 40px;
+}
+
+.exp3 p {
+  padding: inherit;
+}
+
+/*
+PREDICTION:
+Will the paragraph receive 40px padding?
+
+   Yes
+
+WHY? Because we forced the inheritance by using the keyword inherit 
+*/
+
+
+/* =========================================================
+   EXPERIMENT 4
+   INITIAL
+========================================================= */
+
+.exp4 {
+  color: red;
+}
+
+.exp4 p {
+  color: initial;
+}
+
+/*
+PREDICTION:
+Will the paragraph become red?
+No
+
+Or will it use color's initial value?
+Yes it will 
+
+WHY: because the keyword initial tells it to use its CSS predefined initial value.
+*/
+
+
+/* =========================================================
+   EXPERIMENT 5A
+   UNSET + INHERITABLE PROPERTY
+========================================================= */
+
+.exp5a {
+  color: red;
+}
+
+.exp5a p {
+  color: unset;
+}
+
+/*
+PREDICTION:
+What color will the paragraph be?
+Red
+
+WHY: Because Unset becomes inherit when the parent property is inheritable but becomes initial when the property is uninheritable.
+*/
+
+
+/* =========================================================
+   EXPERIMENT 5B
+   UNSET + NON-INHERITABLE PROPERTY
+========================================================= */
+
+.exp5b {
+  margin: 40px;
+}
+
+.exp5b p {
+  margin: unset;
+}
+
+/*
+PREDICTION:
+What margin will the paragraph receive?
+   No
+
+WHY: Because Unset becomes initial when the property isn't natural inheritable.
+*/
+
+
+/* =========================================================
+   EXPERIMENT 6
+   REVERT
+========================================================= */
+
+.exp6 p {
+  color: blue;
+}
+
+.exp6 p {
+  color: revert;
+}
+
+/*
+PREDICTION:
+What is revert attempting to do here?
+it is attempting to leave the current cascade/origin and revert to a previous cascade.
+
+Explain what revert is doing to the cascade.
+
+it is leaving the current cascade my author CSS for another one.
+*/
+
+
+/* =========================================================
+   EXPERIMENT 7
+   REVERT-LAYER
+========================================================= */
+
+@layer experiment-layer {
+
+  .exp7 p {
+    color: blue;
+  }
+
+  .exp7 p {
+    color: revert-layer;
+  }
+
+}
+
+/*
+PREDICTION:
+What does revert-layer attempt to remove?
+Nothing, it's simply attempting to reach another cascade layer.
+
+Does it move to the parent?
+No
+
+Does it move to a different cascade origin?
+No
+
+Or does it move backward within the cascade layer system?
+Yes
+
+WHY: because we're dealing with revert-layer not revert.
+*/
+
+
+/* =========================================================
+   EXPERIMENT 8
+   CASCADE + INHERITANCE
+========================================================= */
+
+.exp8 {
+  color: red;
+}
+
+.exp8 p {
+  color: blue;
+}
+
+.exp8 p {
+  color: inherit;
+}
+
+/*
+PREDICTION:
+
+STEP 1:
+Which declaration wins for the paragraph?
+
+.exp8 p 
+
+color: blue;
+       VS
+color: inherit;
+
+STEP 2:
+What does the winning inherit keyword do?
+
+ANSWER
+it gives it the parent color of its immediate parent.
+
+STEP 3:
+What is the final color?
+
+ANSWER
+Red
+
+WHY: because cascade already decided the winning declaration and .exp8 p has higher specificty than .exp8
+*/
+
+
+/* =========================================================
+   EXPERIMENT 9
+   SPECIFICITY + INHERITANCE
+========================================================= */
+
+.exp9 {
+  color: red;
+}
+
+.exp9 p {
+  color: blue;
+}
+
+.exp9 p.special {
+  color: inherit;
+}
+
+/*
+PREDICTION:
+
+Which declaration wins?
+
+p
+VS
+.exp9 p
+VS
+.exp9 p.special 
+VS
+.exp9 p.special 
+
+ANSWER
+exp9 p.special wins 
+
+What does inherit do after the winning declaration
+has been selected?
+
+ANSWER
+it uses the color value of its immediate parent.
+
+FINAL COLOR: Red
+
+WHY: because it's the winning declaration 
+*/
+
+
+/* =========================================================
+   EXPERIMENT 10
+   SPECIFICITY DEFEATS INHERITANCE
+========================================================= */
+
+.exp10 {
+  color: red;
+}
+
+.exp10 p {
+  color: inherit;
+}
+
+#special-paragraph {
+  color: blue;
+}
+
+/*
+PREDICTION:
+
+Which declaration wins for the paragraph?
+
+.exp10 p
+
+VS
+
+#special-paragraph
+
+ANSWER
+#special-paragraph
+
+Does inherit get a chance to operate? → No because specificity has decided.
+
+
+FINAL COLOR: Blue
+
+WHY: because specificity has decided the winning declaration.
+*/
+
+
+/* =========================================================
+   FINAL EXPERIMENT
+   YOUR COMPLETE MENTAL MODEL
+========================================================= */
+
+.final-test {
+  color: red;
+}
+
+.final-test p {
+  color: blue;
+}
+
+.final-test p.special {
+  color: inherit;
+}
+
+.final-test p#boss {
+  color: green;
+}
+
+/*
+PREDICTION:
+
+1. List every declaration that applies to the #boss paragraph
+
+ANSWER
+.final-test p
+.final-test p.special
+.final-test p#boss
+
+2. Calculate their specificity.
+
+ANSWER
+(0,1,1)
+(0,2,1)
+(1,1,1)
+
+3. Identify the winning declaration.
+
+ANSWER
+final-test p#boss
+
+4. If the winner is inherit, explain what happens next.
+
+ANSWER
+if the winner is inherit then color would've been blue.
+
+5. Give the final rendered color.
+
+ANSWER
+green
+
+=========================================================
+FINAL QUESTION:
+
+In your own words:
+
+What is the relationship between CASCADE and INHERITANCE?
+
+ANSWER
+The relationship between cascade and inheritance is simple, cascade decides the winning declaration whilst inheritance decides how that winning declaration renders/behave if the winning declaration already has a value of its own then inherit will never get a chance.
+
+=========================================================
+*/

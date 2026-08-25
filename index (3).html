@@ -1,0 +1,147 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CSS Inheritance Lab</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main class="lab">
+
+    <h1>CSS Inheritance Lab</h1>
+
+    <section class="experiment">
+      <h2>Experiment 1 — Natural Inheritance</h2>
+
+      <div class="parent exp1">
+        Parent
+        <p>Child paragraph</p>
+      </div>
+    </section>
+
+
+    <section class="experiment">
+      <h2>Experiment 2 — Child Own Value</h2>
+
+      <div class="parent exp2">
+        Parent
+        <p>Child paragraph</p>
+      </div>
+    </section>
+
+
+    <section class="experiment">
+      <h2>Experiment 3 — Forced Inheritance</h2>
+
+      <div class="parent exp3">
+        Parent
+        <p>Child paragraph</p>
+      </div>
+    </section>
+
+
+    <section class="experiment">
+      <h2>Experiment 4 — Initial</h2>
+
+      <div class="parent exp4">
+        Parent
+        <p>Child paragraph</p>
+      </div>
+    </section>
+
+
+    <section class="experiment">
+      <h2>Experiment 5A — Unset + Inheritable Property</h2>
+
+      <div class="parent exp5a">
+        Parent
+        <p>Child paragraph</p>
+      </div>
+    </section>
+
+
+    <section class="experiment">
+      <h2>Experiment 5B — Unset + Non-Inheritable Property</h2>
+
+      <div class="parent exp5b">
+        Parent
+        <p>Child paragraph</p>
+      </div>
+    </section>
+
+
+    <section class="experiment">
+      <h2>Experiment 6 — Revert</h2>
+
+      <div class="parent exp6">
+        Parent
+        <p>Child paragraph</p>
+      </div>
+    </section>
+
+
+    <section class="experiment">
+      <h2>Experiment 7 — Revert Layer</h2>
+
+      <div class="parent exp7">
+        Parent
+        <p>Child paragraph</p>
+      </div>
+    </section>
+
+
+    <section class="experiment">
+      <h2>Experiment 8 — Cascade + Inheritance</h2>
+
+      <div class="parent exp8">
+        Parent
+        <p>Child paragraph</p>
+      </div>
+    </section>
+
+
+    <section class="experiment">
+      <h2>Experiment 9 — Specificity + Inheritance</h2>
+
+      <div class="parent exp9">
+        Parent
+        <p class="special">Child paragraph</p>
+      </div>
+    </section>
+
+
+    <section class="experiment">
+      <h2>Experiment 10 — Specificity Defeats Inheritance</h2>
+
+      <div class="parent exp10">
+        Parent
+        <p id="special-paragraph">Child paragraph</p>
+      </div>
+    </section>
+
+
+    <section class="experiment">
+      <h2>Final Boss — Complete Mental Model</h2>
+
+      <div class="parent final-test">
+        Parent
+
+        <p>Normal paragraph</p>
+
+        <p class="special">Special paragraph</p>
+
+        <p id="boss" class="special">
+          Boss paragraph
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
